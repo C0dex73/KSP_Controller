@@ -15,9 +15,10 @@ using System.IO;
 
 namespace KSP_Communication {
 
-    class Program
+    public static class Program
     {
         private static double oldMach = 0;
+        public static dynamic config = new Config("config.cfg");
 
         public static void Main()
         {
@@ -43,7 +44,7 @@ namespace KSP_Communication {
         private static Tuple<bool, SerialPort, Connection, bool> Configuration()
         {
             //delete latest.log as it will be recreated later on
-            File.Delete("latest.log");
+            File.Delete(config.mainLog);
 
             //dict to convert YesnNo answer to boolean
             IDictionary<string, bool> cCommandsStr2Bool = new Dictionary<string, bool>()
@@ -58,9 +59,7 @@ namespace KSP_Communication {
             bool cCommand;
             while (true) {
                 ConsoleHandler.WriteLine("Console Commands (Y/N) ?", LogLevel.Default, true);
-#pragma warning disable 8600 //nullable string handled below [anwser = anwser == null ? "" : anwser.ToUpper();]
-                string anwser = Console.ReadLine();
-#pragma warning restore 8600
+                string? anwser = Console.ReadLine();
                 anwser = anwser == null ? "" : anwser.ToUpper();
                 if (cCommandsStr2Bool.ContainsKey(anwser))
                 {
@@ -75,14 +74,12 @@ namespace KSP_Communication {
             ConsoleHandler.WriteLine("LogLevel ? {Debug, Info, Commentary, Warning}", LogLevel.Default, true);
             while (ConsoleHandler.consoleLogLevel == LogLevel.Default)
             {
-#pragma warning disable 8604 //nullable string handled in LogLevelFromString(string str)
                 ConsoleHandler.consoleLogLevel = ConsoleHandler.LogLevelFromString(Console.ReadLine());
-#pragma warning restore 8604
             }
             ConsoleHandler.WriteLine("LogLevel choosen : " + nameof(ConsoleHandler.consoleLogLevel), LogLevel.Debug);
 
             //Check if Arduino com is ready, only if console commands are disabled
-            SerialPort serialPort = new("COM6", 9600);
+            SerialPort serialPort = new(config.comPort, config.baudRate);
             if (!cCommand)
             {
                 try
@@ -93,7 +90,7 @@ namespace KSP_Communication {
                 {
                     //if not stop the configuration and return the check as false
                     ConsoleHandler.WriteLine("ControlBoard not detected", LogLevel.Warning);
-#pragma warning disable 8625 //is null only if Item4 is false so it won't be used
+#pragma warning disable 8625 //Connection is null only if Item4 is false so it won't be used
                     return new Tuple<bool, SerialPort, Connection, bool>(cCommand, new SerialPort(), null, false);
 #pragma warning restore 8625
                 }
@@ -111,7 +108,7 @@ namespace KSP_Communication {
             {
                 //if not stop the configuration and return the check as false
                 ConsoleHandler.WriteLine("Could not connect to KRPC Server. Make sure the server is started and the adress is good", LogLevel.Debug);
-#pragma warning disable 8625
+#pragma warning disable 8625 //Connection is null only if Item4 is false so it won't be used
                 return new Tuple<bool, SerialPort, Connection, bool>(cCommand, serialPort, null, false);
 #pragma warning restore 8625
             }
@@ -130,9 +127,7 @@ namespace KSP_Communication {
             bool onWork = false;
             while (true)
             {
-#pragma warning disable 8600 //null instruction handled 
-                string instruction = parameters.Item1 ? Console.ReadLine() : parameters.Item2.ReadLine();
-#pragma warning restore 8600
+                string? instruction = parameters.Item1 ? Console.ReadLine() : parameters.Item2.ReadLine();
                 if (!string.IsNullOrEmpty(instruction))
                 {
                     ConsoleHandler.WriteLine(String.Format("Received instruction from {0} : {1}", parameters.Item1 ? "Console" : "ControlBoard", instruction), LogLevel.Debug);
@@ -164,43 +159,41 @@ namespace KSP_Communication {
         private static void Tick(GameData gameData)
         {
             //update the game data
-            gameData.update();
+            gameData.Update();
 
             #region SoundTraveller
             //Calculating the number of Mach the vessel is at
             double Mach = gameData.flightScene.Speed / gameData.flightScene.SpeedOfSound;
 
             /*
-             * I know that's akward but I dont care
              * subsonique below M0.8
              * transsonique between M0.8 and M1.2
              * supersonique between M1.2 and M5
              * hypersonique above M5
              */
-            if (Mach >= 0.8 && oldMach < 0.8)
+            switch (Mach)
             {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now transsonique.", LogLevel.Commentary);
+                case >= 0.8 when oldMach < 0.8:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now transsonique.", LogLevel.Commentary);
+                    break;
+                case <= 0.8 when oldMach > 0.8:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now subsonique.", LogLevel.Commentary);
+                    break;
+                case >= 1.2 when oldMach < 1.2:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now supersonique.", LogLevel.Commentary);
+                    break;
+                case <= 1.2 when oldMach > 1.2:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now transsonique.", LogLevel.Commentary);
+                    break;
+                case >= 5 when oldMach > 5:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now hypersonique.", LogLevel.Commentary);
+                    break;
+                case <= 5 when oldMach > 5:
+                    ConsoleHandler.WriteLine(gameData.vessel.Name + " is now supersonique.", LogLevel.Commentary);
+                    break;
             }
-            else if (Mach <= 0.8 && oldMach > 0.8)
-            {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now subsonique.", LogLevel.Commentary);
-            }
-            else if (Mach >= 1.2 && oldMach < 1.2)
-            {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now supersonique.", LogLevel.Commentary);
-            }
-            else if (Mach <= 1.2 && oldMach > 1.2)
-            {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now transsonique.", LogLevel.Commentary);
-            }
-            else if (Mach >= 5 && oldMach > 5)
-            {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now hypersonique.", LogLevel.Commentary);
-            }
-            else if (Mach <= 5 && oldMach > 5)
-            {
-                ConsoleHandler.WriteLine(gameData.vessel.Name + " is now supersonique.", LogLevel.Commentary);
-            }
+
+            oldMach = Mach;
             #endregion
         }
 
@@ -221,10 +214,10 @@ namespace KSP_Communication {
         };
 
         //the same as classic console.WriteLine() but with a logLevel filter
-        public static void WriteLine(string msg, LogLevel logLevel, bool Override=false)
+        public static void WriteLine(string? msg, LogLevel logLevel, bool Override=false)
         {
             //Write in console if the logLevel is High enought
-            if (logLevelValues[logLevel] >= logLevelValues[consoleLogLevel] || Override) {
+            if (logLevelValues[logLevel] >= logLevelValues[consoleLogLevel] || Override && msg != null) {
                 
                 Console.WriteLine(msg);
             }
@@ -237,7 +230,7 @@ namespace KSP_Communication {
         }
 
         //Transform a string into a logLevel
-        public static LogLevel LogLevelFromString(string str)
+        public static LogLevel LogLevelFromString(string? str)
         {
             if (str != null)
             {

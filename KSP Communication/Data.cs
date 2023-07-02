@@ -12,48 +12,49 @@
  */
 using KRPC.Client;
 using KRPC.Client.Services.SpaceCenter;
-using System.IO;
-using System;
+using System.Dynamic;
  
 namespace KSP_Communication
 {
-    public class Config
+    public class Config : DynamicObject
     {
-        string mainLog;
-        string comPort;
-        int baudRate;
+        //Class data stored in a dict
+        protected readonly Dictionary<string, dynamic> source = new() { };
 
         public Config(string cfgAdr)
         {
-            string[] cfg = File.ReadAllLines(cfgAdr);
+            //Read config file's lines
+            foreach (string line in File.ReadAllLines(cfgAdr))
+            {
+                //null and commentary lines handled
+                if (!line.StartsWith('#') && line != "")
+                {
+                    //Conversion from cfg to dict
+                    //TODO : Test this part
+                    try
+                    {
+                        string name = line.Split(":")[0].Replace(" ", "");
+                        Type? type = Type.GetType(line.Split("=")[0].Split(":")[1].Replace(" ", ""));
+                        object value = line.Split("=")[1].Replace(" ", "");
 
-            mainLog = cfg[0].Split("=")[1];
-            comPort = cfg[1].Split("=")[1];
-            try
-            {
-                baudRate = int.Parse(cfg[2].Split("=")[1]);
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Something went wrong with the baudRate conversion ! Check the baudrate value in config.cfg (must be an int).");
-                Console.WriteLine("[" + e.Message + "]");
-                Console.WriteLine("The baudRate is set for this runtime to the default value : 9600");
-                baudRate = 9600;
+                        if (type == null) { throw new ArgumentNullException("Type not recognized"); }
+                        source.Add(name, Convert.ChangeType(value,type));
+                    } catch (Exception e)
+                    {
+                        ConsoleHandler.WriteLine("ERROR while converting config.cfg to C# class : " + e.Message, LogLevel.Debug);
+                    }
+                }
             }
         }
 
-        public void Set()
+        public override bool TryGetMember(GetMemberBinder binder, out object? result)
         {
-
-        }
-
-        public void Get()
-        {
-
+            result = null;
+            return source.TryGetValue(binder.Name, out result);
         }
     }
 
-    class GameData
+    public class GameData
     {
         readonly public Connection connection;
         public Vessel vessel;
@@ -64,11 +65,11 @@ namespace KSP_Communication
 #pragma warning restore CS8618
         {
             this.connection = connection;
-            update();
+            Update();
         }
 
         //called every tick and when created, update the data
-        public void update()
+        public void Update()
         {
             vessel = connection.SpaceCenter().ActiveVessel;
             flightScene = vessel.Flight(vessel.Orbit.Body.ReferenceFrame);
