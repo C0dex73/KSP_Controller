@@ -26,7 +26,7 @@ namespace KSP_Communication {
             //if the Configuration didn't Failed (KSP and controlBoard (only if not console commands) connected)
             if (configResult.Item4)
             {
-                //Execute instructions
+                //Execute instructionsk
                 OnWork(configResult);
             }
 
