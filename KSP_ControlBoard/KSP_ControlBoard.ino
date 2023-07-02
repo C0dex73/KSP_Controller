@@ -137,5 +137,11 @@ int soldiFuelLevelPercent = 0;
 int liquidFuelLevelPercent = 0;
 int oxygenLevelPercent = 0;
 
-void setup(){}
+void setup(){
+  Serial.begin(9600);
+  
+  //Telemetric module
+  apPe.begin(16,2);
+  alt.begin(16,2);
+}
 void loop(){}
