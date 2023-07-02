@@ -1,0 +1,14 @@
+~~SAS [0/1, MODE [PG, RG, NO, AN, RD, AR, MV, ST, TA, AT]]
+~~THRUST X {0 --> 1}
+~~STAGE SEPARATION
+~~ACTION [X {1-->10}, LI, BR, GR, AB]
+~~MANEUVER [CREATE, TIME int+/-, PR int+/-, NA int+/-, C int+/-, DELETE]
+REQUEST
+(answer : [	LF x OX x ORE x SF x XE x EL x MP x {1-->100},
+			AP x PE x ALT x RALT x FALL 0/1 {000000000000m --> 9999999999m},
+			DV x SV x OV x RV x {0000000000m/s --> 99999999m/s},
+			TD x {000000000000m --> 9999999999m},
+		])
+~~HALT
+~~START
+~~RCS 1/0

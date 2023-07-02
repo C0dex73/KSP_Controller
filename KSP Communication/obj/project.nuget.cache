@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "EXHRSbB0EUEJ4PJuzb3+mtPTm74OLcjdM1VEpW7CQDOuQHcCENlGP2lt80hDnoCSofkj6W72W504/7rySX/qJQ==",
+  "success": true,
+  "projectFilePath": "D:\\PROG\\KSP controller\\KSP Communication\\KSP Communication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\c0d3x\\.nuget\\packages\\google.protobuf\\3.22.3\\google.protobuf.3.22.3.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\krpc.client\\0.5.2\\krpc.client.0.5.2.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\7.0.0\\runtime.linux-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.native.system.io.ports\\7.0.0\\runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.osx-arm64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-arm64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\7.0.0\\runtime.osx-x64.runtime.native.system.io.ports.7.0.0.nupkg.sha512",
+    "C:\\Users\\c0d3x\\.nuget\\packages\\system.io.ports\\7.0.0\\system.io.ports.7.0.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Le package 'KRPC.Client 0.5.2' a été restauré en utilisant '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' au lieu du framework cible du projet 'net6.0'. Ce package n'est peut-être pas totalement compatible avec votre projet.",
+      "libraryId": "KRPC.Client",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
+}
