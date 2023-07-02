@@ -11,6 +11,7 @@
  */
 using KRPC.Client;
 using System.IO.Ports;
+using System.IO;
 
 namespace KSP_Communication {
 
@@ -229,11 +230,9 @@ namespace KSP_Communication {
             }
 
             //Write in latest.log
-            
-
-            using StreamWriter fs = File.AppendText("latest.log");
+            using StreamWriter log = File.AppendText("latest.log");
             {
-                fs.WriteLine(DateTime.Now.ToString() + " --> " + msg);
+                log.WriteLine(DateTime.Now.ToString() + " --> " + msg);
             }
         }
 
