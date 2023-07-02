@@ -1,3 +1,7 @@
-vs/
-git/
-resistor checker/
+/vs/
+/git/
+/resistor checker/
+/KSP ControlBoard/
+/.gitignore
+/.~lock.cdc.odt#
+/cdc.odt
