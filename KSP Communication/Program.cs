@@ -11,6 +11,7 @@
  */
 using KRPC.Client;
 using System.IO.Ports;
+using System.Threading;
 
 namespace KSP_Communication {
 
@@ -76,7 +77,7 @@ namespace KSP_Communication {
             {
                 ConsoleHandler.consoleLogLevel = ConsoleHandler.LogLevelFromString(Console.ReadLine());
             }
-            ConsoleHandler.WriteLine("LogLevel choosen : " + nameof(ConsoleHandler.consoleLogLevel), LogLevel.Debug);
+            ConsoleHandler.WriteLine("LogLevel choosen : " + ConsoleHandler.consoleLogLevel.ToString(), LogLevel.Debug);
 
             //Check if Arduino com is ready, only if console commands are disabled
             SerialPort serialPort = new(config.comPort, config.baudRate);
@@ -127,50 +128,57 @@ namespace KSP_Communication {
             bool onWork = false;
             while (true)
             {
-                string? instruction = parameters.Item1 ? Console.ReadLine() : parameters.Item2.ReadLine();
-                if (!string.IsNullOrEmpty(instruction))
+                string? instruction = null;
+                do
                 {
-                    ConsoleHandler.WriteLine(String.Format("Received instruction from {0} : {1}", parameters.Item1 ? "Console" : "ControlBoard", instruction), LogLevel.Debug);
-                    //instructions are read by the program in maj only
-                    instruction = instruction.ToUpper();
+                    bool tickOn = true;
+                    Thread tick = new(() => {
+                        while (tickOn) { Tick(gameData); }
+                    });
+                    tick.Start();
+                    instruction = parameters.Item1 ? Console.ReadLine() : parameters.Item2.ReadLine();
+                    tickOn = false;
 
-                    //instruction HALT corresponding to the end of the arduino-sided program
-                    if (instruction == "HALT")
-                    {
-                        ConsoleHandler.WriteLine("CONNECTION SHUTING DOWN with instruction : HALT", LogLevel.Info);
-                        break;
-                    }
-                    else if (instruction == "START")
-                    {
-                        onWork = true;
-                        ConsoleHandler.WriteLine("All systems go for launch !", LogLevel.Commentary);
-                    }
+                } while (string.IsNullOrEmpty(instruction));
 
-                    if (onWork)
-                    {
-                        Tick(gameData);
-                        Instructions.instructionDict[instruction.Split(' ')[0]](instruction.Split(' '), gameData);
-                    }
+                ConsoleHandler.WriteLine(String.Format("Received instruction from {0} : {1}", parameters.Item1 ? "Console" : "ControlBoard", instruction), LogLevel.Debug);
+                //instructions are read by the program in maj only
+                instruction = instruction.ToUpper();
+
+                //instruction HALT corresponding to the end of the arduino-sided program
+                if (instruction == "HALT")
+                {
+                    ConsoleHandler.WriteLine("CONNECTION SHUTING DOWN with instruction : HALT", LogLevel.Info);
+                    break;
+                }
+                else if (instruction == "START")
+                {
+                    onWork = true;
+                    ConsoleHandler.WriteLine("All systems go for launch !", LogLevel.Commentary);
+                }
+                else if (onWork)
+                {
+                    Instructions.instructionDict[instruction.Split(' ')[0]](instruction.Split(' '), gameData);
                 }
             }
         }
 
-        //Will appen every iteration of the main loop
+        //Has his own thread and stops when main loop stops
         private static void Tick(GameData gameData)
         {
             //update the game data
             gameData.Update();
-
+                
             #region SoundTraveller
             //Calculating the number of Mach the vessel is at
             double Mach = gameData.flightScene.Speed / gameData.flightScene.SpeedOfSound;
 
             /*
-             * subsonique below M0.8
-             * transsonique between M0.8 and M1.2
-             * supersonique between M1.2 and M5
-             * hypersonique above M5
-             */
+            * subsonique below M0.8
+            * transsonique between M0.8 and M1.2
+            * supersonique between M1.2 and M5
+            * hypersonique above M5
+            */
             switch (Mach)
             {
                 case >= 0.8 when oldMach < 0.8:
@@ -191,14 +199,15 @@ namespace KSP_Communication {
                 case <= 5 when oldMach > 5:
                     ConsoleHandler.WriteLine(gameData.vessel.Name + " is now supersonique.", LogLevel.Commentary);
                     break;
+                default:
+                    break;
             }
-
             oldMach = Mach;
             #endregion
         }
+    }
 
         #endregion
-    }
 
     //handle all console-related needs
     public static class ConsoleHandler

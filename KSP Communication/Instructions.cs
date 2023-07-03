@@ -123,8 +123,9 @@ namespace KSP_Communication
         //control the thrust
         static public void Thrust(string[] parameters, GameData gameData)
         {
-            gameData.vessel.Control.Throttle = (float)Convert.ToDouble(parameters[1]);
-            ConsoleHandler.WriteLine("Throttle set at " + (gameData.vessel.Control.Throttle * 100).ToString() + "%", LogLevel.Info);
+            float value = (float)Convert.ToDecimal(parameters[1]);
+            gameData.vessel.Control.Throttle = value;
+            ConsoleHandler.WriteLine("Throttle set at " + (value * 100).ToString() + "%", LogLevel.Info);
         }
         
         //control the request command to give gameedata to the controller
