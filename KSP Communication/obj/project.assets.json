@@ -284,11 +284,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\PROG\\KSP controller\\KSP Communication\\KSP Communication.csproj",
+      "projectUniqueName": "D:\\PROG\\KSP Controller\\KSP Communication\\KSP Communication.csproj",
       "projectName": "KSP Communication",
-      "projectPath": "D:\\PROG\\KSP controller\\KSP Communication\\KSP Communication.csproj",
+      "projectPath": "D:\\PROG\\KSP Controller\\KSP Communication\\KSP Communication.csproj",
       "packagesPath": "C:\\Users\\c0d3x\\.nuget\\packages\\",
-      "outputPath": "D:\\PROG\\KSP controller\\KSP Communication\\obj\\",
+      "outputPath": "D:\\PROG\\KSP Controller\\KSP Communication\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

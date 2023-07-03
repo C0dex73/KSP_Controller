@@ -11,14 +11,13 @@
  */
 using KRPC.Client;
 using System.IO.Ports;
-using System.IO;
 
 namespace KSP_Communication {
 
     public static class Program
     {
         private static double oldMach = 0;
-        public static dynamic config = new Config("config.cfg");
+        public static readonly dynamic config = new Config("config.cfg");
 
         public static void Main()
         {
@@ -43,8 +42,9 @@ namespace KSP_Communication {
         //Check if all needed parts are here and working
         private static Tuple<bool, SerialPort, Connection, bool> Configuration()
         {
-            //delete latest.log as it will be recreated later on
-            File.Delete(config.mainLog);
+            //erase the mainLogFile to write this run logs, and write config logs that were held
+            File.WriteAllText(config.mainLog, "");
+            ConsoleHandler.Release();
 
             //dict to convert YesnNo answer to boolean
             IDictionary<string, bool> cCommandsStr2Bool = new Dictionary<string, bool>()
@@ -97,12 +97,12 @@ namespace KSP_Communication {
                 //if it is say it
                 ConsoleHandler.WriteLine("ControlBoard connected", LogLevel.Debug);
             }
-            
+
             //check if the kRCP com is ready
             Connection connection;
             try
             {
-                connection = new Connection();
+                connection = new Connection(config.name, config.address, config.rcpPort, config.streamPort);
             }
             catch (System.Net.Sockets.SocketException)
             {
@@ -204,25 +204,51 @@ namespace KSP_Communication {
     public static class ConsoleHandler
     {
         public static LogLevel consoleLogLevel = LogLevel.Default;
-        private static IDictionary<LogLevel, int> logLevelValues = new Dictionary<LogLevel, int>()
+        private readonly static IDictionary<LogLevel, int> logLevelValues = new Dictionary<LogLevel, int>()
         {
-            { LogLevel.Default, -1 },
-            {LogLevel.Debug, 0},
-            {LogLevel.Warning, 1},
-            {LogLevel.Info, 2},
-            {LogLevel.Commentary, 3}
+            { LogLevel.Default, int.MaxValue },
+            { LogLevel.Debug, 0 },
+            { LogLevel.Warning, 1 },
+            { LogLevel.Info, 2 },
+            { LogLevel.Commentary, 3 }
         };
 
+        private static List<string> heldLog = new();
+
         //the same as classic console.WriteLine() but with a logLevel filter
-        public static void WriteLine(string? msg, LogLevel logLevel, bool Override=false)
+        public static void WriteLine(string? msg, LogLevel logLevel, bool Override=false, bool hold=false)
         {
+            if (msg == null) { return; }
+
             //Write in console if the logLevel is High enought
-            if (logLevelValues[logLevel] >= logLevelValues[consoleLogLevel] || Override && msg != null) {
+            if (logLevelValues[logLevel] >= logLevelValues[consoleLogLevel] || Override) {
                 
                 Console.WriteLine(msg);
             }
 
-            //Write in latest.log
+            //If held, the data will be written when Release() will be called, else write it now
+            if (hold)
+            {
+                heldLog.Add(msg);
+            }
+            else
+            {
+                Log(msg);
+            }
+        }
+
+        public static void Release()
+        {
+            foreach (string msg in heldLog)
+            {
+                Log(msg);
+            }
+
+            heldLog.Clear();
+        }
+
+        private static void Log(string msg)
+        {
             using StreamWriter log = File.AppendText("latest.log");
             {
                 log.WriteLine(DateTime.Now.ToString() + " --> " + msg);
