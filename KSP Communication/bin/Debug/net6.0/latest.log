@@ -1,29 +1,10 @@
-03/07/2023 16:11:21 --> Converting mainLogSystem.Stringlatest.log to an object of Config().
-03/07/2023 16:11:21 --> Converting comPortSystem.StringCOM8 to an object of Config().
-03/07/2023 16:11:21 --> Converting baudRateSystem.Int329600 to an object of Config().
-03/07/2023 16:11:21 --> Converting nameSystem.StringkrcpServer to an object of Config().
-03/07/2023 16:11:21 --> Converting addressSystem.Net.IPAddress,System.Net127.0.0.1 to an object of Config().
-03/07/2023 16:11:21 --> Converting rcpPortSystem.Int3250000 to an object of Config().
-03/07/2023 16:11:21 --> Converting streamPortSystem.Int3250001 to an object of Config().
-03/07/2023 16:11:21 --> Console Commands (Y/N) ?
-03/07/2023 16:11:22 --> LogLevel ? {Debug, Info, Commentary, Warning}
-03/07/2023 16:11:24 --> LogLevel choosen : Debug
-03/07/2023 16:11:24 --> Connected to KRCP server
-03/07/2023 16:11:30 --> Received instruction from Console : START
-03/07/2023 16:11:30 --> All systems go for launch !
-03/07/2023 16:11:33 --> Received instruction from Console : SAS 0
-03/07/2023 16:11:33 --> SAS going on
-03/07/2023 16:11:36 --> Received instruction from Console : THRUST 1
-03/07/2023 16:11:36 --> Throttle set at 100%
-03/07/2023 16:11:39 --> Received instruction from Console : STAGE
-03/07/2023 16:11:39 --> Stage separation confirmed
-03/07/2023 16:12:08 --> #autoLOC_501214 is now transsonique.
-03/07/2023 16:12:09 --> Received instruction from Console : SAS 0
-03/07/2023 16:12:09 --> SAS going on
-03/07/2023 16:12:10 --> #autoLOC_501214 is now subsonique.
-03/07/2023 16:12:22 --> #autoLOC_501214 is now transsonique.
-03/07/2023 16:12:24 --> #autoLOC_501214 is now supersonique.
-03/07/2023 16:12:39 --> #autoLOC_501214 is now transsonique.
-03/07/2023 16:12:39 --> #autoLOC_501214 is now supersonique.
-03/07/2023 16:12:40 --> #autoLOC_501214 is now transsonique.
-03/07/2023 16:12:44 --> #autoLOC_501214 is now subsonique.
+03/07/2023 16:23:54 --> Converting mainLogSystem.Stringlatest.log to an object of Config().
+03/07/2023 16:23:54 --> Converting comPortSystem.StringCOM8 to an object of Config().
+03/07/2023 16:23:54 --> Converting baudRateSystem.Int329600 to an object of Config().
+03/07/2023 16:23:54 --> Converting nameSystem.StringkrcpServer to an object of Config().
+03/07/2023 16:23:54 --> Converting addressSystem.Net.IPAddress,System.Net127.0.0.1 to an object of Config().
+03/07/2023 16:23:54 --> Converting rcpPortSystem.Int3250000 to an object of Config().
+03/07/2023 16:23:54 --> Converting streamPortSystem.Int3250001 to an object of Config().
+03/07/2023 16:23:54 --> Console Commands (Y/N) ?
+03/07/2023 16:23:56 --> Wrong Input
+03/07/2023 16:23:56 --> Console Commands (Y/N) ?

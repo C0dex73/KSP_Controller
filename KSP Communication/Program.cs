@@ -11,7 +11,7 @@
  */
 using KRPC.Client;
 using System.IO.Ports;
-using System.Threading;
+using System.Diagnostics;
 
 namespace KSP_Communication {
 
@@ -66,6 +66,9 @@ namespace KSP_Communication {
                 {
                     cCommand = cCommandsStr2Bool[anwser];
                     break;
+                }else if(anwser == "CONFIG")
+                {
+                    Process.Start("notepad.exe", "config.cfg");
                 }
                 ConsoleHandler.WriteLine("Wrong Input", LogLevel.Default, true);
             }

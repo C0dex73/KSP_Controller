@@ -14,7 +14,6 @@ D:\PROG\KSP Controller\KSP Communication\bin\Debug\net6.0\runtimes\osx-arm64\nat
 D:\PROG\KSP Controller\KSP Communication\bin\Debug\net6.0\runtimes\osx-x64\native\libSystem.IO.Ports.Native.dylib
 D:\PROG\KSP Controller\KSP Communication\bin\Debug\net6.0\runtimes\unix\lib\net6.0\System.IO.Ports.dll
 D:\PROG\KSP Controller\KSP Communication\bin\Debug\net6.0\runtimes\win\lib\net6.0\System.IO.Ports.dll
-D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.csproj.AssemblyReference.cache
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.GeneratedMSBuildEditorConfig.editorconfig
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.AssemblyInfoInputs.cache
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.AssemblyInfo.cs
