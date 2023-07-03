@@ -121,13 +121,13 @@ const int SOLIDFUELADD_Pin = 10;
 const int LIQUIDFUELADD_Pin = 9;
 const int OXYGENADD_Pin = 8;
 
-const int XENONREMOVE_Pin = 14;
-const int MONOPROPREMOVE_Pin = 13;
-const int OREREMOVE_Pin = 12;
-const int ELECREMOVE_Pin = 11;
-const int SOLIDFUELREMOVE_Pin = 10;
-const int LIQUIDFUELREMOVE_Pin = 9;
-const int OXYGENREMOVE_Pin = 8;
+const int XENONREMOVE_Pin = 7;
+const int MONOPROPREMOVE_Pin = 6;
+const int OREREMOVE_Pin = 5;
+const int ELECREMOVE_Pin = 4;
+const int SOLIDFUELREMOVE_Pin = 3;
+const int LIQUIDFUELREMOVE_Pin = 2;
+const int OXYGENREMOVE_Pin = 1;
 
 int xenonLevelPercent = 0;
 int monopropLevelPercent = 0;
@@ -143,5 +143,13 @@ void setup(){
   //Telemetric module
   apPe.begin(16,2);
   alt.begin(16,2);
+
+  pinMode(XENONADD_Pin, OUTPUT);
+  pinMode(MONOPROPADD_Pin, OUTPUT);
+  pinMode(OREADD_Pin, OUTPUT);
+  pinMode(ELECADD_Pin, OUTPUT);
+  pinMode(SOLIDFUELADD_Pin, OUTPUT);
+  
 }
+
 void loop(){}
