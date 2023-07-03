@@ -2,7 +2,7 @@
 /git/
 /resistor checker/
 /KSP ControlBoard/
-/.gitignore
+.gitignore
 /.~lock.cdc.odt#
 /cdc.odt
 *.bak
