@@ -1,5 +1,7 @@
 //Libraries
 #include <LiquidCrystal.h>
+#include <SoftwareSerial.h>
+
 
 //Startup module
 const int STARTUP_Pin = 53;
@@ -87,15 +89,15 @@ int gotoState = 0;
 int oldGotoState = 0;
 
 //no need of an old state because handled internaly
-const int SENSIBILITY_Pin = A15;
+const int SENSIBILITY_Pin = A0;
 float sensibility = 0.00;
 
 
 //Main rotation module
 //no need of an old state because handled internaly
-const int JOYSTICK1X_Pin = A14;
-const int JOYSTICK1Y_Pin = A13;
-const int JOYSTICK1R_Pin = A12;
+const int JOYSTICK1X_Pin = A1;
+const int JOYSTICK1Y_Pin = A2;
+const int JOYSTICK1R_Pin = A3;
 
 float joystick1X = 0.00;
 float joystick1Y = 0.00;
@@ -105,9 +107,9 @@ const int SAS_Pin = 27;
 int sasState = 0;
 int oldSasState = 0;
 
-const int THRUST_Pin = A11;
+const int THRUST_Pin = A4;
 float thrust = 0.00;
-float OldThrust = 0.00
+float oldThrust = 0.00;
 
 //Telemetric module
 LiquidCrystal apPe(26, 25, 24, 23, 22, 21);
@@ -137,19 +139,37 @@ int soldiFuelLevelPercent = 0;
 int liquidFuelLevelPercent = 0;
 int oxygenLevelPercent = 0;
 
-void setup(){
-  Serial.begin(9600);
-  
-  //Telemetric module
-  apPe.begin(16,2);
-  alt.begin(16,2);
+struct e {
 
-  pinMode(XENONADD_Pin, OUTPUT);
-  pinMode(MONOPROPADD_Pin, OUTPUT);
-  pinMode(OREADD_Pin, OUTPUT);
-  pinMode(ELECADD_Pin, OUTPUT);
-  pinMode(SOLIDFUELADD_Pin, OUTPUT);
-  
+};
+
+void setup() {
+
+	//Serial
+	Serial.begin(9600);
+
+	//Telemetric module
+	apPe.begin(16, 2);
+	alt.begin(16, 2);
+
+	pinMode(XENONADD_Pin, OUTPUT);
+	pinMode(MONOPROPADD_Pin, OUTPUT);
+	pinMode(OREADD_Pin, OUTPUT);
+	pinMode(ELECADD_Pin, OUTPUT);
+	pinMode(SOLIDFUELADD_Pin, OUTPUT);
+	pinMode(LIQUIDFUELADD_Pin, OUTPUT);
+	pinMode(OXYGENADD_Pin, OUTPUT);
+
+	pinMode(XENONREMOVE_Pin, OUTPUT);
+	pinMode(MONOPROPREMOVE_Pin, OUTPUT);
+	pinMode(OREREMOVE_Pin, OUTPUT);
+	pinMode(ELECREMOVE_Pin, OUTPUT);
+	pinMode(SOLIDFUELREMOVE_Pin, OUTPUT);
+	pinMode(LIQUIDFUELREMOVE_Pin, OUTPUT);
+	pinMode(OXYGENREMOVE_Pin, OUTPUT);
+
+	//MainRotationModule
+
 }
 
-void loop(){}
+void loop() {}
