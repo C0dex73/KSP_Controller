@@ -1,6 +1,9 @@
 //Libraries
 #include <LiquidCrystal.h>
-#include <SoftwareSerial.h>
+
+//constants
+#define ANALOG_MAX 1023
+#define ANALOG_MIN 0
 
 
 //Startup module
@@ -16,46 +19,23 @@ int abortState = 0;
 int oldAbortState = 0;
 
 //Action module
-const int ACTIONGROUP1_Pin = 41;
-const int ACTIONGROUP2_Pin = 42;
-const int ACTIONGROUP3_Pin = 43;
-const int ACTIONGROUP4_Pin = 44;
-const int ACTIONGROUP5_Pin = 45;
-const int ACTIONGROUP6_Pin = 46;
-const int ACTIONGROUP7_Pin = 47;
-const int ACTIONGROUP8_Pin = 48;
-const int ACTIONGROUP9_Pin = 49;
-const int ACTIONGROUP10_Pin = 50;
+const int ACTIONGROUP1TO3_Pin = 41;
+const int ACTIONGROUP4TO6_Pin = 42;
+const int ACTIONGROUP6TO9_Pin = 43;
+const int ACTIONGROUP10_Pin = 44;
 
-int actionGroup1State = 0;
-int oldActionGroup1State = 0;
+int actionGroup1To3State = 0;
+int oldActionGroup1To3State = 0;
 
-int actionGroup2State = 0;
-int oldActionGroup2State = 0;
+int actionGroup4To6State = 0;
+int oldActionGroup4To6State = 0;
 
-int actionGroup3State = 0;
-int oldActionGroup3State = 0;
-
-int actionGroup4State = 0;
-int oldActionGroup4State = 0;
-
-int actionGroup5State = 0;
-int oldActionGroup5State = 0;
-
-int actionGroup6State = 0;
-int oldActionGroup6State = 0;
-
-int actionGroup7State = 0;
-int oldActionGroup7State = 0;
-
-int actionGroup18tate = 0;
-int oldActionGroup8State = 0;
-
-int actionGroup9State = 0;
-int oldActionGroup9State = 0;
+int actionGroup7To9State = 0;
+int oldActionGroup7To9State = 0;
 
 int actionGroup10State = 0;
 int oldActionGroup10State = 0;
+
 
 //Maneuver Module
 LiquidCrystal ManeuverLcd(35, 36, 37, 38, 39, 40);
@@ -90,26 +70,20 @@ int oldGotoState = 0;
 
 //no need of an old state because handled internaly
 const int SENSIBILITY_Pin = A0;
-float sensibility = 0.00;
+int sensibility = 0.00;
 
 
 //Main rotation module
 //no need of an old state because handled internaly
-const int JOYSTICK1X_Pin = A1;
-const int JOYSTICK1Y_Pin = A2;
-const int JOYSTICK1R_Pin = A3;
-
-float joystick1X = 0.00;
-float joystick1Y = 0.00;
-float joystick1R = 0.00;
+const int ROTATEJOY_Pin[4] = {A1, A2, A3, };
 
 const int SAS_Pin = 27;
 int sasState = 0;
 int oldSasState = 0;
 
 const int THRUST_Pin = A4;
-float thrust = 0.00;
-float oldThrust = 0.00;
+int thrust = 0.00;
+int oldThrust = 0.00;
 
 //Telemetric module
 LiquidCrystal apPe(26, 25, 24, 23, 22, 21);

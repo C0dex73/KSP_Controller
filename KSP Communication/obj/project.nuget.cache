@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "3IM2XWong9gZp589+rkLP4g3N7kUkg8Tb08/H3s5GfyBSUm3hoeSmVHWoQJC2VZAyeE46jhKcGRwqhbDZ/l4iQ==",
+  "dgSpecHash": "EXHRSbB0EUEJ4PJuzb3+mtPTm74OLcjdM1VEpW7CQDOuQHcCENlGP2lt80hDnoCSofkj6W72W504/7rySX/qJQ==",
   "success": true,
-  "projectFilePath": "D:\\PROG\\KSP Controller\\KSP Communication\\KSP Communication.csproj",
+  "projectFilePath": "D:\\PROG\\KSP controller\\KSP Communication\\KSP Communication.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\c0d3x\\.nuget\\packages\\google.protobuf\\3.22.3\\google.protobuf.3.22.3.nupkg.sha512",
     "C:\\Users\\c0d3x\\.nuget\\packages\\krpc.client\\0.5.2\\krpc.client.0.5.2.nupkg.sha512",
