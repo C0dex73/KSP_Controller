@@ -1,6 +1,6 @@
 ~~SAS [0/1, MODE [PG, RG, NO, AN, RD, AR, MV, ST, TA, AT]]
 ~~THRUST X {0 --> 1}
-~~STAGE SEPARATION
+~~STAGE
 ~~ACTION [X {1-->10}, LI, BR, GR, AB]
 ~~MANEUVER [CREATE, TIME int+/-, PR int+/-, NA int+/-, C int+/-, DELETE]
 REQUEST
@@ -12,3 +12,4 @@ REQUEST
 ~~HALT
 ~~START
 ~~RCS 1/0
+INPUT [Z, Q, S, D, A, E, I, J, K, L, H, N]

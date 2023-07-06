@@ -23,3 +23,4 @@ D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.dll
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\ref\KSP Communication.dll
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.pdb
 D:\PROG\KSP Controller\KSP Communication\obj\Debug\net6.0\KSP Communication.genruntimeconfig.cache
+D:\PROG\KSP controller\KSP Communication\obj\Debug\net6.0\KSP Communication.csproj.AssemblyReference.cache

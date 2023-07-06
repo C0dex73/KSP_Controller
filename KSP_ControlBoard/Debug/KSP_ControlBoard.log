@@ -1,0 +1,45 @@
+﻿  pins.cpp
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(16,1): warning C4005: '__AVR_atmega32u4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : message : voir la définition précédente de '__AVR_atmega32u4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(17,1): warning C4005: '__AVR_ATmega32U4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : message : voir la définition précédente de '__AVR_ATmega32U4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(18,1): warning C4005: '__AVR_ATmega32u4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : message : voir la définition précédente de '__AVR_ATmega32u4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(21,1): warning C4005: 'ARDUINO_AVR_YUN' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : message : voir la définition précédente de 'ARDUINO_AVR_YUN'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(22,1): warning C4005: 'ARDUINO_ARCH_AVR' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\pins.cpp : message : voir la définition précédente de 'ARDUINO_ARCH_AVR'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(25,1): warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(34,1): warning C4117: nom de macro '__cplusplus' réservé, '#undef' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(35,1): warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include\stddef.h(216,23): error C2371: 'size_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\predefined C++ types (compiler internal)(16): message : voir la déclaration de 'size_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\stdlib.h(73,3): error C2371: 'div_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(67): message : voir la déclaration de 'div_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\stdlib.h(79,3): error C2371: 'ldiv_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(68): message : voir la déclaration de 'ldiv_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include\stdint.h(9,1): fatal error C1021: commande de préprocesseur non valide 'include_next'
+  workers.cpp
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(16,1): warning C4005: '__AVR_atmega32u4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : message : voir la définition précédente de '__AVR_atmega32u4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(17,1): warning C4005: '__AVR_ATmega32U4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : message : voir la définition précédente de '__AVR_ATmega32U4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(18,1): warning C4005: '__AVR_ATmega32u4__' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : message : voir la définition précédente de '__AVR_ATmega32u4__'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(21,1): warning C4005: 'ARDUINO_AVR_YUN' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : message : voir la définition précédente de 'ARDUINO_AVR_YUN'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(22,1): warning C4005: 'ARDUINO_ARCH_AVR' : redéfinition de macro
+D:\PROG\KSP controller\KSP_ControlBoard\workers.cpp : message : voir la définition précédente de 'ARDUINO_ARCH_AVR'
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(25,1): warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(34,1): warning C4117: nom de macro '__cplusplus' réservé, '#undef' ignoré
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(35,1): warning C4117: nom de macro '__cplusplus' réservé, '#define' ignoré
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include\stddef.h(216,23): error C2371: 'size_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\predefined C++ types (compiler internal)(16): message : voir la déclaration de 'size_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\stdlib.h(73,3): error C2371: 'div_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(67): message : voir la déclaration de 'div_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\avr\include\stdlib.h(79,3): error C2371: 'ldiv_t' : redéfinition ; types de base différents
+D:\PROG\KSP controller\KSP_ControlBoard\__vm\.KSP_ControlBoard.vsarduino.h(68): message : voir la déclaration de 'ldiv_t'
+C:\Users\c0d3x\AppData\Local\arduino15\packages\arduino\tools\avr-gcc\7.3.0-atmel3.6.1-arduino7\lib\gcc\avr\7.3.0\include\stdint.h(9,1): fatal error C1021: commande de préprocesseur non valide 'include_next'
+  Génération de code en cours...

@@ -6,8 +6,6 @@
  * Krcp needed
  * Read commands.txt to know how to communicate with it
  * Use config.cfg or type config in the console at start to setup your environnement
- * 
- * 
  */
 using KRPC.Client;
 using System.IO.Ports;
@@ -146,7 +144,7 @@ namespace KSP_Communication {
 
                 ConsoleHandler.WriteLine(String.Format("Received instruction from {0} : {1}", parameters.Item1 ? "Console" : "ControlBoard", instruction), LogLevel.Debug);
                 //instructions are read by the program in maj only
-                instruction = instruction.ToUpper();
+                instruction = instruction.ToUpper().Split("\r")[0];
 
                 //instruction HALT corresponding to the end of the arduino-sided program
                 if (instruction == "HALT")
@@ -182,6 +180,7 @@ namespace KSP_Communication {
             * supersonique between M1.2 and M5
             * hypersonique above M5
             */
+
             switch (Mach)
             {
                 case >= 0.8 when oldMach < 0.8:
@@ -196,7 +195,7 @@ namespace KSP_Communication {
                 case <= 1.2 when oldMach > 1.2:
                     ConsoleHandler.WriteLine(gameData.vessel.Name + " is now transsonique.", LogLevel.Commentary);
                     break;
-                case >= 5 when oldMach > 5:
+                case >= 5 when oldMach < 5:
                     ConsoleHandler.WriteLine(gameData.vessel.Name + " is now hypersonique.", LogLevel.Commentary);
                     break;
                 case <= 5 when oldMach > 5:

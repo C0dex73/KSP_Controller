@@ -1,10 +1,17 @@
-03/07/2023 16:23:54 --> Converting mainLogSystem.Stringlatest.log to an object of Config().
-03/07/2023 16:23:54 --> Converting comPortSystem.StringCOM8 to an object of Config().
-03/07/2023 16:23:54 --> Converting baudRateSystem.Int329600 to an object of Config().
-03/07/2023 16:23:54 --> Converting nameSystem.StringkrcpServer to an object of Config().
-03/07/2023 16:23:54 --> Converting addressSystem.Net.IPAddress,System.Net127.0.0.1 to an object of Config().
-03/07/2023 16:23:54 --> Converting rcpPortSystem.Int3250000 to an object of Config().
-03/07/2023 16:23:54 --> Converting streamPortSystem.Int3250001 to an object of Config().
-03/07/2023 16:23:54 --> Console Commands (Y/N) ?
-03/07/2023 16:23:56 --> Wrong Input
-03/07/2023 16:23:56 --> Console Commands (Y/N) ?
+06/07/2023 19:27:57 --> Converting mainLogSystem.Stringlatest.log to an object of Config().
+06/07/2023 19:27:57 --> Converting comPortSystem.StringCOM8 to an object of Config().
+06/07/2023 19:27:57 --> Converting baudRateSystem.Int329600 to an object of Config().
+06/07/2023 19:27:57 --> Converting nameSystem.StringkrcpServer to an object of Config().
+06/07/2023 19:27:57 --> Converting addressSystem.Net.IPAddress,System.Net127.0.0.1 to an object of Config().
+06/07/2023 19:27:57 --> Converting rcpPortSystem.Int3250000 to an object of Config().
+06/07/2023 19:27:57 --> Converting streamPortSystem.Int3250001 to an object of Config().
+06/07/2023 19:27:57 --> Console Commands (Y/N) ?
+06/07/2023 19:28:01 --> LogLevel ? {Debug, Info, Commentary, Warning}
+06/07/2023 19:28:04 --> LogLevel choosen : Debug
+06/07/2023 19:28:04 --> ControlBoard connected
+06/07/2023 19:28:04 --> Connected to KRCP server
+06/07/2023 19:28:05 --> Received instruction from ControlBoard : START
+06/07/2023 19:28:05 --> All systems go for launch !
+06/07/2023 19:28:08 --> Received instruction from ControlBoard : HALT
+06/07/2023 19:28:08 --> CONNECTION SHUTING DOWN with instruction : HALT
+06/07/2023 19:28:08 --> CONNECTION SHUTTED DOWN

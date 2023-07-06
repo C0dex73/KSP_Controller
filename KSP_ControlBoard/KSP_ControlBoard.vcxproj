@@ -101,11 +101,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MyClass.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="pins.h" />
+    <ClInclude Include="workers.h" />
     <ClInclude Include="__vm\.KSP_ControlBoard.vsarduino.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pins.cpp" />
+    <ClCompile Include="workers.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

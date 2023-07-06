@@ -21,8 +21,19 @@
     <ClInclude Include="__vm\.KSP_ControlBoard.vsarduino.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MyClass.h">
+    <ClInclude Include="pins.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="workers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pins.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
+    <ClCompile Include="workers.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
