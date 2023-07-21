@@ -43,7 +43,7 @@ namespace KSP_Communication
             //else it specify if it is on or off, get the state and set it
             else
             {
-                bool sas = !Convert.ToBoolean(Convert.ToInt32(parameters[1]));
+                bool sas = Convert.ToBoolean(Convert.ToInt32(parameters[1]));
                 if (sas) { ConsoleHandler.WriteLine("SAS going on", LogLevel.Info); }
                 else { ConsoleHandler.WriteLine("SAS going off", LogLevel.Info); }
                 gameData.vessel.AutoPilot.SAS = sas;
@@ -54,7 +54,7 @@ namespace KSP_Communication
         static public void RCS(string[] parameters, GameData gameData)
         {
             //RCD command specify the state (on/off) so get it and set it
-            bool rcs = !Convert.ToBoolean(Convert.ToInt32(parameters[1]));
+            bool rcs = Convert.ToBoolean(Convert.ToInt32(parameters[1]));
             if (rcs) { ConsoleHandler.WriteLine("RCS going on", LogLevel.Info); }
             else { ConsoleHandler.WriteLine("RCS going off", LogLevel.Info); }
             gameData.vessel.AutoPilot.SAS = rcs;

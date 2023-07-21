@@ -10,12 +10,12 @@ const int D6 = 50;
 const int D7 = 49;
 
 //Startup module
-Startup startup(2);
-Staging staging(3);
-Abort flightAbort(4);
+Startup startup(22);
+Staging staging(23);
+Abort flightAbort(24);
 
 //Action module
-const int ACTIONGROUP1TO3_Pin = A0;
+ActionGroupMultiple AG1To3(A0, new int[3] { 1, 2, 3 });
 const int ACTIONGROUP4TO6_Pin = A1;
 const int ACTIONGROUP6TO9_Pin = A2;
 const int ACTIONGROUP10_Pin = 5;
@@ -78,12 +78,17 @@ const int OXYGENREMOVE_Pin = 33;
 
 void Debug(){
 	//Serial.println(flightAbort.state);
+
+	Serial.print(AG1To3.AGState[0]);
+	Serial.print(AG1To3.AGState[1]);
+	Serial.println(AG1To3.AGState[2]);
 }
 
 void Actions() {
 	flightAbort.Action();
 	startup.Action();
 	staging.Action();
+	AG1To3.Action();
 }
 
 void setup() {
