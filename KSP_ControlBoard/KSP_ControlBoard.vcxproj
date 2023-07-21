@@ -101,6 +101,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="pinNb.h" />
     <ClInclude Include="pins.h" />
     <ClInclude Include="workers.h" />
     <ClInclude Include="__vm\.KSP_ControlBoard.vsarduino.h" />

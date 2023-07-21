@@ -24,10 +24,14 @@ class Staging : public DigitalPin {
 		void Action();
 };
 
-class ActionGroup : public AnalogPin {
+class ActionGroup : public DigitalPin {
 	public:
-		
-		ActionGroup(int _pin, int Nb) : AnalogPin(_pin) {};
+		String AG;
+
+		ActionGroup(int _pin, String _AG) :
+			AG {_AG},
+			DigitalPin(_pin, INPUT) {};
+		void Action();
 };
 
 class ActionGroupMultiple : public AnalogPin {
@@ -35,14 +39,13 @@ class ActionGroupMultiple : public AnalogPin {
 		void ChangeState(int _AGState[3]);
 
 	public :
-		
-		resCombo oldComboState;
 		resCombo comboState;
 
-		int AG[3];
-		int AGState[3] = {};
+		String AG[3];
+		int AGState[3] = {0, 0, 0};
+		int oldAGState[3] = {0, 0, 0};
 
-		ActionGroupMultiple(int _pin, int _AG[3]) :
+		ActionGroupMultiple(int _pin, String _AG[3]) :
 			AG { _AG[0], _AG[1], _AG[2]},
 			AnalogPin(_pin) {};
 		void Action();

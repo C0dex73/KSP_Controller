@@ -28,6 +28,10 @@ bool DigitalPin::Pressed() {
 	return state == HIGH;
 }
 
+bool DigitalPin::ChangingState() {
+	return oldState != state;
+}
+
 //****************************ANALOG PIN****************************\\
 
 AnalogPin::AnalogPin(int _pin){

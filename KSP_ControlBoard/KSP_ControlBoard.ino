@@ -1,27 +1,22 @@
 //Libraries
 #include <LiquidCrystal.h>
 #include "workers.h"
+#include "pinNb.h"
 
-//multiple lcd handling
-const int RS = 53;
-const int D4 = 52;
-const int D5 = 51;
-const int D6 = 50;
-const int D7 = 49;
 
 //Startup module
-Startup startup(22);
-Staging staging(23);
-Abort flightAbort(24);
+Startup startup(STARTUPPIN);
+Staging staging(STAGINGPIN);
+Abort flightAbort(ABORTPIN);
 
 //Action module
-ActionGroupMultiple AG1To3(A0, new int[3] { 1, 2, 3 });
-const int ACTIONGROUP4TO6_Pin = A1;
-const int ACTIONGROUP6TO9_Pin = A2;
-const int ACTIONGROUP10_Pin = 5;
+ActionGroupMultiple AG1To3(ACTIONS1TO3PIN, new String[3]{ "1", "2", "3" });
+ActionGroupMultiple AG4To6(ACTIONS4TO6PIN, new String[3]{ "4", "5", "6" });
+ActionGroupMultiple AG7To9(ACTIONS7TO9PIN, new String[3]{ "7", "8", "9" });
+ActionGroup AG10(ACTION10PIN, "10");
 
 //Maneuver Module
-LiquidCrystal ManeuverLcd(RS, 48, D4, D5, D6, D7);
+LiquidCrystal ManeuverLcd(RS, MANEUVERLCDENPIN, D4, D5, D6, D7);
 
 const int PROGRADEADD_Pin = 6;
 const int PROGRADEREMOVE_Pin = 7;
@@ -89,10 +84,12 @@ void Actions() {
 	startup.Action();
 	staging.Action();
 	AG1To3.Action();
+	AG4To6.Action();
+	AG7To9.Action();
+	AG10.Action();
 }
 
 void setup() {
-
 	//Serial
 	Serial.begin(9600);
 }

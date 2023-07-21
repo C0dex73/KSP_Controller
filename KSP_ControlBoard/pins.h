@@ -38,6 +38,8 @@ class DigitalPin : public Pin {
         bool Turning(bool transfert);
         //True if the signal if HIGH
         bool Pressed();
+        //True is oldState != state
+        bool ChangingState();
 };
 
 //Handle any analog input pin

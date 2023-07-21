@@ -157,9 +157,14 @@ namespace KSP_Communication
                     };
 
                     modif[parameters[1]](Convert.ToDouble(parameters[2]));
-                    ConsoleHandler.WriteLine("Node modified : " + parameters[1] + parameters[2], LogLevel.Info);
+                    ConsoleHandler.WriteLine("Node modified : " + parameters[1] + parameters[2], LogLevel.Debug);
                 }
             }
+        }
+
+        static public void Message(string[] parameters, GameData gameData)
+        {
+            ConsoleHandler.WriteLine(parameters[1], ConsoleHandler.LogLevelFromString(parameters[2]));
         }
 
         //contain all the commands (withoput arguments)
@@ -170,7 +175,8 @@ namespace KSP_Communication
             {"STAGE", Stage},
             {"THRUST", Thrust},
             {"MANEUVER", Maneuver},
-            {"REQUEST", Request}
+            {"REQUEST", Request},
+            {"MSG", Message }
         };
     }
 }

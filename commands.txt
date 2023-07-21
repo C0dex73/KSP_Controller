@@ -1,7 +1,7 @@
 ~~SAS [0/1, MODE [PG, RG, NO, AN, RD, AR, MV, ST, TA, AT]]
 ~~THRUST X {0 --> 1}
 ~~STAGE
-~~ACTION [X {1-->10}, LI, BR, GR, AB]
+~~ACTION [[X {1-->10}, LI, BR, GR, AB], 0,1]
 ~~MANEUVER [CREATE, TIME int+/-, PR int+/-, NA int+/-, C int+/-, DELETE]
 REQUEST
 (answer : [	LF x OX x ORE x SF x XE x EL x MP x {1-->100},
@@ -13,3 +13,4 @@ REQUEST
 ~~START
 ~~RCS 1/0
 INPUT [Z, Q, S, D, A, E, I, J, K, L, H, N]
+MSG [DEBUG, INFO, WARNING, COMMENTARY]

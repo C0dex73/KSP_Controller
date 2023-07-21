@@ -28,8 +28,19 @@ void Staging::Action() {
 	}
 }
 
+void ActionGroup::Action() {
+	Tick();
+
+	if (ChangingState()) {
+		Serial.print("ACTION " + AG + " ");
+		Serial.println(state);
+	}
+}
+
 void ActionGroupMultiple::ChangeState(int _AGState[3]) {
+	
 	for (int i = 0; i < 3; i++) {
+		oldAGState[i] = AGState[i];
 		AGState[i] = _AGState[i];
 	}
 }
@@ -37,7 +48,6 @@ void ActionGroupMultiple::ChangeState(int _AGState[3]) {
 void ActionGroupMultiple::Action() {
 	Tick();
 
-	oldComboState = comboState;
 	switch (state) {
 	case 600 ... 620:
 		comboState = resCombo::C150K;
@@ -70,5 +80,12 @@ void ActionGroupMultiple::Action() {
 	default:
 		comboState = resCombo::None;
 		ChangeState(new int[3]{ 0, 0, 0 });
+	}
+
+	for (int i = 0; i < 3; i++) {
+		if (AGState[i] != oldAGState[i]) {
+			Serial.print("ACTION " + AG[i] + " ");
+			Serial.println(AGState[i]);
+		}
 	}
 }

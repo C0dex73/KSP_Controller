@@ -27,6 +27,9 @@
     <ClInclude Include="workers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="pinNb.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pins.cpp">
