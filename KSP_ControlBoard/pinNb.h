@@ -24,4 +24,29 @@ const int ACTION10PIN = 25;
 //MANEUVER MODULE
 const int MANEUVERLCDENPIN = 26;
 
+const int MANEUVERSENSIBILITYPIN = A3;
+
+const int PROGRADEPIN = 27;
+const int RETROGRADEPIN = 28;
+const int RADIALINPIN = 29;
+const int RADIALOUTPIN = 30;
+const int NORMALPIN = 31;
+const int ANTINORMALPIN = 32;
+const int TIMEADDPIN = 33;
+const int TIMEREMOVEPIN = 34;
+
+const int GOTOPIN = 35;
+
+//MAIN ROTATION MODULE
+const int ROTATEJOY_Pin[4] = { A4, A5, A6, 36 };
+//TODO : #define each axis
+
+const int SASPIN = 37;
+const int THRUSTPIN = A7;
+
+//MAIN TRANSLATION MODULE
+//TODO : JOYSTICK CONTROLLER
+
+const int LIGHTSPIN = 38;
+
 #endif

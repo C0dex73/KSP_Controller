@@ -1,53 +1,114 @@
 //Libraries
-#include <LiquidCrystal.h>
-#include "workers.h"
-#include "pinNb.h"
+#include <LiquidCrystal.h>;
+#include "workers.h";
+#include "pinNb.h";
 
+//Struct modules definitions
 
-//Startup module
-Startup startup(STARTUPPIN);
-Staging staging(STAGINGPIN);
-Abort flightAbort(ABORTPIN);
+struct StartupModule
+{
+	Startup startup;
+	Staging staging;
+	Abort flightAbort;
 
-//Action module
-ActionGroupMultiple AG1To3(ACTIONS1TO3PIN, new String[3]{ "1", "2", "3" });
-ActionGroupMultiple AG4To6(ACTIONS4TO6PIN, new String[3]{ "4", "5", "6" });
-ActionGroupMultiple AG7To9(ACTIONS7TO9PIN, new String[3]{ "7", "8", "9" });
-ActionGroup AG10(ACTION10PIN, "10");
+	void Action() {
+		startup.Action();
+		staging.Action();
+		flightAbort.Action();
+	}
+};
+StartupModule startupModule = {
+		Startup(STARTUPPIN),
+		Staging(STAGINGPIN),
+		Abort(ABORTPIN),
+};
 
-//Maneuver Module
-LiquidCrystal ManeuverLcd(RS, MANEUVERLCDENPIN, D4, D5, D6, D7);
+struct ActionModule {
+	ActionGroupMultiple AG1TO9[3];
+	ActionGroup AG10;
 
-const int PROGRADEADD_Pin = 6;
-const int PROGRADEREMOVE_Pin = 7;
+	#define AG1TO3 0
+	#define AG4TO6 1
+	#define AG7TO9 2
 
-const int RADIALADD_Pin = 8;
-const int RADIALREMOVE_Pin = 9;
+	void Action() {
+		for (int i = 0; i < 3; i++) {
+			AG1TO9[i].Action();
+		}
+		AG10.Action();
+	}
+};
 
-const int NORMALADD_Pin = 10;
-const int NORMALREMOVE_Pin = 11;
+ActionModule actionModule = {
+		ActionGroupMultiple(ACTIONS1TO3PIN, new String[3]{ "1", "2", "3" }),
+		ActionGroupMultiple(ACTIONS4TO6PIN, new String[3]{ "4", "5", "6" }),
+		ActionGroupMultiple(ACTIONS7TO9PIN, new String[3]{ "7", "8", "9" }),
+		ActionGroup(ACTION10PIN, "10")
+};
 
-const int GOTO_Pin = 12;
+struct ManeuverModule {
+	ManeuverController controllers[8];
+	LiquidCrystal lcd;
+	AnalogPin sensibility;
+	Goto goTo;
 
-//no need of an old state because handled internaly
-const int SENSIBILITY_Pin = A3;
-int sensibility = 0.00;
+	#define prograde 0
+	#define retrograde 1
+	#define radialIn 2
+	#define radialOut 3
+	#define normal 4
+	#define antiNormal 5
+	#define timeAdd 6
+	#define timeRemove 7
 
+	void Action() {
+		sensibility.Tick();
+		for (int i = 0; i < 8; i++) {
+			controllers[i].Action();
+		}
+		goTo.Action();
+	}
+
+	void ControllersInit(ManeuverController _controllers[8]) {
+		for (int i = 0; i < 8; i++) {
+			controllers[i] = _controllers[i];
+		}
+	}
+};
+ManeuverModule maneuverModule = {
+	{NOMANEUVER, NOMANEUVER, NOMANEUVER, NOMANEUVER, NOMANEUVER, NOMANEUVER, NOMANEUVER, NOMANEUVER},
+	LiquidCrystal(RS, MANEUVERLCDENPIN, D4, D5, D6, D7),
+	AnalogPin(MANEUVERSENSIBILITYPIN),
+	Goto(GOTOPIN)
+};
+
+struct RotationModule {
+	//TODO : HANDLE JOYSTICK
+
+	SAS sas;
+	Thrust thrust;
+
+	void Action() {
+		sas.Action();
+		thrust.Action();
+	}
+};
+
+RotationModule rotationModule = {
+		SAS(SASPIN),
+		Thrust(THRUSTPIN)
+};
 
 //Main rotation module
-//no need of an old state because handled internaly
-const int ROTATEJOY_Pin[4] = {A4, A5, A6, 13};
 
-const int SAS_Pin = 14;
 
-const int THRUST_Pin = A7;
 
 //Main translation module
 const int TRANSLATEJOY_Pin[4] = { A8, A9, A10, 15 };
 
 const int RCS_Pin = 16;
 
-const int LIGHTS_Pin = 17;
+
 const int GEARS_Pin = 18;
 const int BREAKS_Pin = 19;
 
@@ -74,24 +135,42 @@ const int OXYGENREMOVE_Pin = 33;
 void Debug(){
 	//Serial.println(flightAbort.state);
 
-	Serial.print(AG1To3.AGState[0]);
-	Serial.print(AG1To3.AGState[1]);
-	Serial.println(AG1To3.AGState[2]);
+	//Serial.print(actionModule.AG1TO9[0].AGState[0]);
+	//Serial.print(actionModule.AG1TO9[0].AGState[1]);
+	//Serial.println(actionModule.AG1TO9[0].AGState[2]);
+
+	Serial.println(rotationModule.thrust.thrust);
 }
 
 void Actions() {
-	flightAbort.Action();
-	startup.Action();
-	staging.Action();
-	AG1To3.Action();
-	AG4To6.Action();
-	AG7To9.Action();
-	AG10.Action();
+	//Startup
+	startupModule.Action();
+
+	//Action
+	actionModule.Action();
+
+	//Maneuver
+	maneuverModule.Action();
+
+	//Rotation
+	rotationModule.Action();
 }
 
 void setup() {
 	//Serial
 	Serial.begin(9600);
+
+	maneuverModule.ControllersInit(new ManeuverController[8]{ 
+		ManeuverController(PROGRADEPIN, "PR ", maneuverModule.sensibility),
+		ManeuverController(RETROGRADEPIN, "PR -", maneuverModule.sensibility),
+		ManeuverController(RADIALINPIN, "RD ", maneuverModule.sensibility),
+		ManeuverController(RADIALOUTPIN, "RD -", maneuverModule.sensibility),
+		ManeuverController(NORMALPIN, "NO ", maneuverModule.sensibility),
+		ManeuverController(ANTINORMALPIN, "NO -", maneuverModule.sensibility),
+		ManeuverController(TIMEADDPIN, "TIME ", maneuverModule.sensibility),
+		ManeuverController(TIMEREMOVEPIN, "TIME -", maneuverModule.sensibility)
+	});
+
 }
 
 void loop() {

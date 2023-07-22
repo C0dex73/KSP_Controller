@@ -39,6 +39,14 @@ AnalogPin::AnalogPin(int _pin){
 }
 
 void AnalogPin::Tick() {
+	oldAnalogState = analogState;
+	analogState = analogRead(pin);
+
 	oldState = state;
-	state = analogRead(pin);
+	if (analogState == 0) {
+		state = LOW;
+	}
+	else {
+		state = HIGH;
+	}
 }

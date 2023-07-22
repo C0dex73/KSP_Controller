@@ -45,6 +45,9 @@ class DigitalPin : public Pin {
 //Handle any analog input pin
 class AnalogPin : public Pin {
     public:
+        float analogState = 0.00;
+        float oldAnalogState = 0.00f;
+
         AnalogPin(int _pin);
 
         void Tick();

@@ -4,7 +4,9 @@
 #include <Arduino.h>
 #include "pins.h"
 
-enum resCombo {None,  A33K, B100K, C150K, AB25K, BC60K, CA27K, ABC21K};
+
+
+//Startup module
 
 class Abort : public DigitalPin {
 	public:
@@ -24,6 +26,8 @@ class Staging : public DigitalPin {
 		void Action();
 };
 
+//Action module
+
 class ActionGroup : public DigitalPin {
 	public:
 		String AG;
@@ -34,9 +38,11 @@ class ActionGroup : public DigitalPin {
 		void Action();
 };
 
+enum resCombo { None, A33K, B100K, C150K, AB25K, BC60K, CA27K, ABC21K };
+
 class ActionGroupMultiple : public AnalogPin {
 	private:
-		void ChangeState(int _AGState[3]);
+		void ChangeAGState(int _AGState[3]);
 
 	public :
 		resCombo comboState;
@@ -48,6 +54,43 @@ class ActionGroupMultiple : public AnalogPin {
 		ActionGroupMultiple(int _pin, String _AG[3]) :
 			AG { _AG[0], _AG[1], _AG[2]},
 			AnalogPin(_pin) {};
+		void Action();
+};
+
+//Maneuver module
+class ManeuverController : public DigitalPin {
+	public:
+		String msg;
+		AnalogPin sensibilityPin;
+
+		ManeuverController(int _pin, String _msg, AnalogPin _sensibilityPin) :
+			msg { _msg },
+			sensibilityPin { _sensibilityPin },
+			DigitalPin(_pin, INPUT_PULLUP) {};
+		void Action();
+};
+#define NOMANEUVER ManeuverController(0,"", AnalogPin(0))
+
+class Goto : public DigitalPin {
+	public:
+		Goto(int _pin) : DigitalPin(_pin, INPUT_PULLUP) {};
+		void Action();
+};
+
+//Rotation module
+
+class SAS : public DigitalPin {
+	public:
+		SAS(int _pin) : DigitalPin(_pin, INPUT) {};
+		void Action();
+};
+
+class Thrust : public AnalogPin {
+	public:
+		float thrust = 0.00;
+		float oldThrust = 0.00;
+
+		Thrust(int _pin) : AnalogPin(_pin) {};
 		void Action();
 };
 
