@@ -144,14 +144,21 @@ namespace KSP_Communication
             }
             else if (gameData.vessel.Control.Nodes.Count != 0)
             {
-                if (parameters[1] == "DELETE") { gameData.vessel.Control.Nodes.First<Node>().Remove(); }
+                if (parameters[1] == "GOTO")
+                {
+                    gameData.connection.SpaceCenter().WarpTo(gameData.vessel.Control.Nodes.First<Node>().TimeTo + gameData.connection.SpaceCenter().UT);
+                }
+                else if (parameters[1] == "DELETE") {
+                    gameData.vessel.Control.Nodes.First<Node>().Remove();
+                    ConsoleHandler.WriteLine("Node Deleted", LogLevel.Info);
+                }
                 else
                 {
                     //for each type of modif, a parameter in the first node is modified
                     Dictionary<string, Action<double>> modif = new Dictionary<string, Action<double>>()
                     {
                         {"PR", (double i) => {gameData.vessel.Control.Nodes.First<Node>().Prograde += i; } },
-                        {"RA", (double i) => {gameData.vessel.Control.Nodes.First<Node>().Radial += i; } },
+                        {"RD", (double i) => {gameData.vessel.Control.Nodes.First<Node>().Radial += i; } },
                         {"NO", (double i) => {gameData.vessel.Control.Nodes.First<Node>().Normal += i; } },
                         {"TI", (double i) => {gameData.vessel.Control.Nodes.First<Node>().UT += i; } }
                     };
